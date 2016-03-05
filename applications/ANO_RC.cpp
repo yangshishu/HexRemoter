@@ -28,8 +28,8 @@ void ANO_RC::DataGet(void)
 	DataRaw[PITCH] = DataRaw[PITCH] * 0.99 + (float)(ADC_ConvertedValue[2])/2		* 0.01;//Çã½Ç
 	DataRaw[YAW] = DataRaw[YAW] * 0.99 + (float)ADC_ConvertedValue[1]/2 * 0.01;//º½Ïò
 	DataRaw[THROTTLE] = DataRaw[THROTTLE] * 0.99 + (float)(4095-ADC_ConvertedValue[0])/2 * 0.01;//ÓÍÃÅ
-	KeyDataRawL = (float)ADC_ConvertedValue[5];
-	KeyDataRawR = (float)ADC_ConvertedValue[6];
+	KeyDataRawL = (float)ADC_ConvertedValue[4];
+	KeyDataRawR = (float)ADC_ConvertedValue[5];
 }
 
 void ANO_RC::DataCalculate(void)
@@ -76,43 +76,43 @@ void ANO_RC::KeyCheck(void)
 			keyFlagL = 0;		
 		}
 	}
-	else if(KeyDataL>1950 && KeyDataL<2100 && keyFlagL)	//YAW-
+	else if(KeyDataL>2100 && KeyDataL<2300 && keyFlagL)	//YAW-
 	{
 		if(!timeDelayFlag)
 			timeDelayFlag = 10;
 		
-		if(KeyDataL>1950 && KeyDataL<2100 && timeDelayFlag == 1)
+		if(KeyDataL>2100 && KeyDataL<2300 && timeDelayFlag == 1)
 		{
 			DataTrim[YAW] += 2;
 			param.SAVE_RC_OFFSET();
 			keyFlagL = 0;		
 		}
 	}
-	else if(KeyDataL>2650 && KeyDataL<2750 && keyFlagL)	//THR-
+	else if(KeyDataL>3100 && KeyDataL<3300 && keyFlagL)	//THR-
 	{
 		if(!timeDelayFlag)
 			timeDelayFlag = 10;
 		
-		if(KeyDataL>2650 && KeyDataL<2750 && timeDelayFlag == 1)
+		if(KeyDataL>3100 && KeyDataL<3300 && timeDelayFlag == 1)
 		{
 			DataTrim[THROTTLE] += 2;
 			param.SAVE_RC_OFFSET();
 			keyFlagL = 0;		
 		}
 	}
-	else if(KeyDataL>3000 && KeyDataL<3100 && keyFlagL)	//YAW+
+	else if(KeyDataL>2800 && KeyDataL<3000 && keyFlagL)	//YAW+
 	{
 		if(!timeDelayFlag)
 			timeDelayFlag = 10;
 		
-		if(KeyDataL>3000 && KeyDataL<3100 && timeDelayFlag == 1)
+		if(KeyDataL>2800 && KeyDataL<3000 && timeDelayFlag == 1)
 		{
 			DataTrim[YAW] -= 2;
 			param.SAVE_RC_OFFSET();
 			keyFlagL = 0;
 		}
 	}
-	else if(KeyDataL>3200 && KeyDataL<3300 && keyFlagL)
+	else if(KeyDataL>3300 && KeyDataL<3600 && keyFlagL)
 	{
 		if(!timeDelayFlag)
 			timeDelayFlag = 10;
@@ -150,36 +150,36 @@ void ANO_RC::KeyCheck(void)
 			keyFlagR = 0;		
 		}
 	}
-	else if(KeyDataR>1900 && KeyDataR<2100 && keyFlagR)	//ROLL+
+	else if(KeyDataR>2100 && KeyDataR<2300 && keyFlagR)	//ROLL-
 	{
 		if(!timeDelayFlag)
 			timeDelayFlag = 10;
 		
-		if(KeyDataR>1900 && KeyDataR<2100 && keyFlagR && timeDelayFlag == 1)
+		if(KeyDataR>2100 && KeyDataR<2300 && keyFlagR && timeDelayFlag == 1)
 		{
 			DataTrim[ROLL] -= 2;
 			param.SAVE_RC_OFFSET();
 			keyFlagR = 0;		
 		}
 	}
-	else if(KeyDataR>2600 && KeyDataR<2800 && keyFlagR)	//PITCH-
+	else if(KeyDataR>3100 && KeyDataR<3300 && keyFlagR)	//PITCH-
 	{
 		if(!timeDelayFlag)
 			timeDelayFlag = 10;
 		
-		if(KeyDataR>2600 && KeyDataR<2800 && keyFlagR && timeDelayFlag == 1)
+		if(KeyDataR>3100 && KeyDataR<3300 && keyFlagR && timeDelayFlag == 1)
 		{
 			DataTrim[PITCH] += 2;
 			param.SAVE_RC_OFFSET();
 			keyFlagR = 0;	
 		}			
 	}
-	else if(KeyDataR>2950 && KeyDataR<3150 && keyFlagR)	//ROLL-
+	else if(KeyDataR>2800 && KeyDataR<3000 && keyFlagR)	//ROLL+
 	{
 		if(!timeDelayFlag)
 			timeDelayFlag = 10;
 		
-		if(KeyDataR>2950 && KeyDataR<3150 && keyFlagR && timeDelayFlag == 1)
+		if(KeyDataR>2800 && KeyDataR<3000 && keyFlagR && timeDelayFlag == 1)
 		{
 			DataTrim[ROLL] += 2;
 			param.SAVE_RC_OFFSET();
@@ -195,12 +195,12 @@ void ANO_RC::KeyCheck(void)
 		{
 		}
 	}
-	else if(KeyDataR>3350 && KeyDataR<3450 && keyFlagR)
+	else if(KeyDataR>3350 && KeyDataR<3600 && keyFlagR)
 	{
 		if(!timeDelayFlag)
 			timeDelayFlag = 10;
 		
-		if(KeyDataR>3350 && KeyDataR<3450 && keyFlagR && timeDelayFlag == 1)
+		if(KeyDataR>3350 && KeyDataR<3600 && keyFlagR && timeDelayFlag == 1)
 		{
 
 		}
